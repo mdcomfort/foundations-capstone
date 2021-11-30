@@ -6,6 +6,7 @@ const getQuote = () => {
         let quoteDiv = document.querySelector('#quote-display')
         quoteDiv.textContent = data
     })
+    .catch((err) => console.log(err))
 }
 
 document.addEventListener('DOMContentLoaded', getQuote)
@@ -21,7 +22,8 @@ const getBooks = () => {
             myBookTitle.textContent = data[i]
             myBookList.appendChild(myBookTitle)
             let deleteButton = document.createElement('button')
-            deleteButton.textContent = 'x'
+            deleteButton.className = 'delete-button'
+            deleteButton.textContent = 'del'
             deleteButton.addEventListener('click', deleteBook)
             myBookList.appendChild(deleteButton)
             document.querySelector('ul').appendChild(myBookList)
@@ -46,7 +48,8 @@ const addBook = (event) => {
         newTitle.textContent = data[data.length -1]
         newBook.appendChild(newTitle)
         let deleteButton = document.createElement('button')
-        deleteButton.textContent = 'x'
+        deleteButton.className = 'delete-button'
+        deleteButton.textContent = 'del'
         deleteButton.addEventListener('click', deleteBook)
         newBook.appendChild(deleteButton)
         document.querySelector('ul').appendChild(newBook) 
@@ -67,6 +70,7 @@ const deleteBook = (event) => {
         document.querySelector('ul').innerHTML = ''
         getBooks()
     })
+    .catch((err) => console.log(err))
 }
 
 getBooks()

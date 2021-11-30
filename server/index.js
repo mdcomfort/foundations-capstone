@@ -8,11 +8,12 @@ app.use(cors())
 
 const listCtrl = require("./controller")
 
-const {getQuote} = listCtrl
-const {getBooks} = listCtrl
-const {addBook} = listCtrl
-const {deleteBook} = listCtrl
-
+const {
+    getQuote,
+    getBooks,
+    addBook,
+    deleteBook
+} = listCtrl
 
 app.get('/quotes', getQuote)
 app.get('/books', getBooks)
