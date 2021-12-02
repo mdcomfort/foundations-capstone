@@ -11,7 +11,7 @@ const getQuote = () => {
 
 document.addEventListener('DOMContentLoaded', getQuote)
 
-const getBooks = (event) => {
+const getBooks = () => {
     axios.get('http://localhost:5000/books')
     .then((res) => {
         const data = res.data
@@ -36,7 +36,7 @@ const getBooks = (event) => {
     .catch((err) => console.log(err))
 }
 
-const getRead = (event) => {
+const getRead = () => {
     axios.get('http://localhost:5000/read')
     .then((res) => {
         const data = res.data
