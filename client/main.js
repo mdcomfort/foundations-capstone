@@ -125,7 +125,6 @@ const moveToRead = (event) => {
 
     axios.put(`http://localhost:5000/books/${title}`, bookRead)
     .then((res) => {
-        console.log(res.data)
         document.querySelector('#book-list-2').innerHTML =''
         getRead()
         document.querySelector('#book-list').innerHTML = ''
