@@ -11,14 +11,20 @@ const listCtrl = require("./controller")
 const {
     getQuote,
     getBooks,
+    getRead,
     addBook,
-    deleteBook
+    deleteBook,
+    deleteRead,
+    moveBook
 } = listCtrl
 
 app.get('/quotes', getQuote)
 app.get('/books', getBooks)
+app.get('/read', getRead)
 app.post('/book', addBook)
 app.delete('/books/:title', deleteBook)
+app.delete('/read/:title', deleteRead)
+app.put('/books/:title', moveBook)
 
 
 app.listen(port, () => console.log(`Server is live on port ${port}.`))

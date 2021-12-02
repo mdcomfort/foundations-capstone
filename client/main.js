@@ -11,11 +11,10 @@ const getQuote = () => {
 
 document.addEventListener('DOMContentLoaded', getQuote)
 
-const getBooks = () => {
+const getBooks = (event) => {
     axios.get('http://localhost:5000/books')
     .then((res) => {
         const data = res.data
-        console.log(data)
         for (let i = 0; i < data.length; i++) {
             let myBookList = document.createElement('li')
             let myBookTitle = document.createElement('span')
@@ -26,10 +25,34 @@ const getBooks = () => {
             deleteButton.textContent = 'del'
             deleteButton.addEventListener('click', deleteBook)
             myBookList.appendChild(deleteButton)
+            let readButton = document.createElement('button')
+            readButton.className = 'read-button'
+            readButton.textContent = 'read'
+            readButton.addEventListener('click', moveToRead)
+            myBookList.appendChild(readButton)
             document.querySelector('ul').appendChild(myBookList)
         }
     })
     .catch((err) => console.log(err))
+}
+
+const getRead = (event) => {
+    axios.get('http://localhost:5000/read')
+    .then((res) => {
+        const data = res.data
+        for (let i = 0; i < data.length; i++) {
+            let myReadList = document.createElement('li')
+            let myReadTitle = document.createElement('span')
+            myReadTitle.textContent = data[i]
+            myReadList.appendChild(myReadTitle)
+            let deleteButton = document.createElement('button')
+            deleteButton.className = 'delete-button'
+            deleteButton.textContent = 'del'
+            deleteButton.addEventListener('click', deleteRead)
+            myReadList.appendChild(deleteButton)
+            document.querySelector('#book-list-2').appendChild(myReadList)
+        }
+    })
 }
 
 const addBook = (event) => {
@@ -52,6 +75,11 @@ const addBook = (event) => {
         deleteButton.textContent = 'del'
         deleteButton.addEventListener('click', deleteBook)
         newBook.appendChild(deleteButton)
+        let readButton = document.createElement('button')
+        readButton.className = 'read-button'
+        readButton.textContent = 'read'
+        readButton.addEventListener('click', moveToRead)
+        newBook.appendChild(readButton)
         document.querySelector('ul').appendChild(newBook) 
         bookInput.value = ''
     })
@@ -67,10 +95,44 @@ const deleteBook = (event) => {
 
     axios.delete(`http://localhost:5000/books/${title}`)
     .then((res) => {
-        document.querySelector('ul').innerHTML = ''
+        document.querySelector('#book-list').innerHTML = ''
         getBooks()
     })
     .catch((err) => console.log(err))
 }
 
+const deleteRead = (event) => {
+    event.preventDefault()
+
+    let title = event.target.parentNode.firstChild.textContent
+
+    axios.delete(`http://localhost:5000/read/${title}`)
+    .then((res) => {
+        document.querySelector('#book-list-2').innerHTML = ''
+        getRead()
+    })
+    .catch((err) => console.log(err))
+}
+
+const moveToRead = (event) => {
+    event.preventDefault()
+
+    let title = event.target.parentNode.firstChild.textContent
+
+    let bookRead = {
+        bookTitle: title
+    }
+
+    axios.put(`http://localhost:5000/books/${title}`, bookRead)
+    .then((res) => {
+        console.log(res.data)
+        document.querySelector('#book-list-2').innerHTML =''
+        getRead()
+        document.querySelector('#book-list').innerHTML = ''
+        getBooks()
+    })
+}
+
 getBooks()
+
+getRead()

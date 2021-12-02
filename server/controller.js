@@ -1,4 +1,5 @@
 const books = []
+const isRead = []
 
 module.exports = {
     getQuote: (req, res) => {
@@ -8,23 +9,45 @@ module.exports = {
         res.status(200).send(randomQuote)
     },
     getBooks: (req, res) => {
-        console.log(books)
         res.status(200).send(books)
+    },
+    getRead: (req, res) => {
+        res.status(200).send(isRead)
     },
     addBook: (req, res) => {
         let {newBook} = req.body
         books.push(newBook)
         res.status(200).send(books)
-        console.log(books)
     },
     deleteBook: (req, res) => {
-        let bookDelete = req.params.title
+        let bookToDelete = req.params.title
         for (let i = 0; i < books.length; i++) {
-            if (books[i] === bookDelete) {
-                console.log(books[i])
+            if (books[i] === bookToDelete) {
                 books.splice(i, 1)
+                break
             } 
         }
         res.status(200).send(books)
+    },
+    deleteRead: (req, res) => {
+        let readToDelete = req.params.title
+        for (let i = 0; i < isRead.length; i++) {
+            if (isRead[i] === readToDelete) {
+                isRead.splice(i, 1)
+                break
+            } 
+        }
+        res.status(200).send(isRead)
+    },
+    moveBook: (req, res) => {
+        let {bookTitle} = req.body
+        for (let i = 0; i < books.length; i++) {
+            if (books[i] === bookTitle) {
+            isRead.push(books[i])
+            books.splice(i, 1)
+            break
+            }
+        }
+        res.status(200).send(isRead)
     }
 }

@@ -12,18 +12,25 @@
     <header>
     <div id="quote-display"></div>
     </header>
+
     <div id="form-div">
     <form>
-        <input id="book-input" type="text" placeholder="Book title" />
+        <input id="book-input" type="text" placeholder="Book title"/>
         <button id="book-add" type="submit">Add to list</button>
     </form>
     </div>
-    <div id="list-title">
-        <h1>My Reading List</h1>
+
+    <div id="list-container">    
+        <div>
+            <h2 class="list-title">Reading List</h2>
+            <ul class="list-div" id="book-list"></ul>
         </div>
-    <div class="list-div">
-    <ul id="book-list"></ul>
+        <div>
+            <h2 class="list-title">Read</h2>
+            <ul class="second-list-div" id="book-list-2"></ul>
+        </div>
     </div>
+
     <script src="./main.js"></script>
 </body>
 </html>
