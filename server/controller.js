@@ -1,5 +1,5 @@
-const books = []
-const isRead = []
+const books = ["The Left Hand of Darkness", "The Old Man and the Sea", "Braiding Sweetgrass", "Hyperion", "Dubliners"]
+const isRead = ["Mrs. Dalloway"]
 
 module.exports = {
     getQuote: (req, res) => {
