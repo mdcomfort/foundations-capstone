@@ -1,5 +1,5 @@
 
-// empty lists 'book' and 'isRead' created to hold the book list entries for the To Read and Read lists respectively
+// empty lists 'toRead' and 'isRead' created to hold the book list entries for the To Read and Read lists respectively
 const toRead = []
 const isRead = []
 
